@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Drag List Vue.js</title>
+  <script src="https://unpkg.com/vue"></script><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id='app'>
+  <ul class="todo-list">
+    <li>
+      <input placeholder="Type a number and press enter" type="text" class="new-todo todo-item" v-model="newItem" @keyup.enter="addNItems">
+    </li>
+    <li class="todo-item" v-for="(item, i) in todos" v-key="i" draggable="true" @dragstart="dragStart(i, $event)" @dragover.prevent @dragenter="dragEnter" @dragleave="dragLeave" @dragend="dragEnd" @drop="dragFinish(i, $event)">
+      <input class="todo-item inputBox" :class="{done: item.done}" @keyup="updateTitle(item, $event.target.value)" maxlength = "25" v-bind:value="item.title" />
+      <span class="remove-item" @click="removeItem(item)">x</span>
+    </li>
+    </li>
+  </ul>
+  <button @click="saveItems()">Save</button>
+  <button @click="reset()">Reset</button>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
